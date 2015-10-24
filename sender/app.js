@@ -6,4 +6,5 @@ var configuration = JSON.parse(
     fs.readFileSync(configFile)
 );
 
-console.log(configuration.API_KEY);
+console.log("CONFIGURATION LOADED, use configuration.<key>");
+console.log(configuration);
