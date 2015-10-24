@@ -1,4 +1,5 @@
 var fs = require('fs');
+var math = require('mathjs');
 var configFile = 'config.json';
 
 // Load config
@@ -17,7 +18,7 @@ var clockwork = require('clockwork')({key:configuration.API_KEY});
 console.log("... done");
 
 // Test message
-clockwork.sendSms({To:configuration.TEST_PHONE_NUMBER,Content:'SPAM'}, function(error, response) {
+clockwork.sendSms({To:configuration.TEST_PHONE_NUMBERS[0],Content:'SPAM'}, function(error, response) {
     if (error) {
         console.log('Error', error);
     } else {
