@@ -21,12 +21,22 @@ console.log("Configuring clockwork SMS");
 var clockwork = require('clockwork')({key:configuration.API_KEY});
 console.log("... done");
 
-// Connect to the db and send
+// Test message
+clockwork.sendSms({To:configuration.TEST_PHONE_NUMBER,Content:'SPAM'}, function(error, response) {
+    if (error) {
+        console.log("Error, couldn't send");
+        console.log('Error', error);
+    } else {
+        console.log("SMS Sent");
+    }
+});
+
+// Connect to the db and submit change
 MongoClient.connect("mongodb://onedottwo:maIts5yUb5Thac@ds031531.mongolab.com:31531/middleman", function(err, db) {
     if(!err) {
         console.log("We are connected");
         var collection = db.collection('messages');
-        var doc1 = {'to':'447749638453', 'from':'7749638455', 'message':"RAWR"};
+        var doc1 = {'to':configuration.TEST_PHONE_NUMBER, 'from':'system', 'message':'SPAM'};
         collection.insert(doc1, {w:1}, function(err, result) {
             if(err) {
                 console.log("Couldn't send to database");
@@ -36,15 +46,5 @@ MongoClient.connect("mongodb://onedottwo:maIts5yUb5Thac@ds031531.mongolab.com:31
         });
     } else {
         console.log("ERROR: Couldn't connect to remote mongo");
-    }
-});
-
-// Test message
-clockwork.sendSms({To:configuration.TEST_PHONE_NUMBER,Content:'SPAM'}, function(error, response) {
-    if (error) {
-        console.log("Error, couldn't send");
-        console.log('Error', error);
-    } else {
-        console.log("SMS Sent");
     }
 });
