@@ -1,0 +1,16 @@
+{
+    "messages": [
+        {
+            "id": 1,
+            "from": "01234567890",
+            "to": "01234567891",
+            "message": "hello world",   
+        },
+        {
+            "id": 2,
+            "from": "01234567891",
+            "to": "01234567890",
+            "message": "hello world, how are you?",
+        }
+    ]
+}
